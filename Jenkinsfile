@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage('Lint') {
         steps {
-            sh 'helm lint ./omni-TIMEZONE'
+            sh 'helm lint ./omni-timezone'
         }
     }
  
