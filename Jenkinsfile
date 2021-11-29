@@ -132,8 +132,8 @@ pipeline {
               sh 'curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash'
               sh 'kubectl create namespace omni-prod | true'
               //sh 'helm uninstall ${appName} --namespace omni-prod |true'
-              sh "helm install --namespace omni-prod ${appName} ./omni-timezone/ --set=image.tag=${env.BUILD_NUMBER} -f ./omni-timezone/values-prod.yaml"
-              //sh "helm upgrade -f ./omni-timezone/values-prod.yaml --namespace omni-prod ${appName} ./omni-timezone/ --atomic --timeout 600s --set=image.tag=${env.BUILD_NUMBER}"   
+              //sh "helm install --namespace omni-prod ${appName} ./omni-timezone/ --set=image.tag=${env.BUILD_NUMBER} -f ./omni-timezone/values-prod.yaml"
+              sh "helm upgrade -f ./omni-timezone/values-prod.yaml --namespace omni-prod ${appName} ./omni-timezone/ --atomic --timeout 600s --set=image.tag=${env.BUILD_NUMBER}"   
           }
         }
     }
