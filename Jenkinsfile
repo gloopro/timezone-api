@@ -43,6 +43,9 @@ pipeline {
               sh "aws configure set region 'eu-west-1' --profile paypecker"
               sh "aws configure set output 'json' --profile paypecker"
               sh 'aws eks --region eu-west-1 update-kubeconfig --name Omni --profile paypecker'
+              sh 'sudo yum remove -y docker-ce docker-ce-cli docker'
+              sh 'sudo yum install docker -y'
+              sh 'sudo systemctl start docker'
               sh 'docker build . -f ./deploy/Dockerfile --build-arg CLOUD_ID=${ELASTIC_CLOUD_ID} --build-arg CLOUD_AUTH=${ELASTIC_CLOUD_AUTH} --build-arg SERVICE_ENVIRONMENT=dev --build-arg SERVICE_NAME=${appName} -t ${appName}' 
               sh 'docker tag ${appName}:latest ${IMAGETAGDEMO}'
               sh 'aws ecr get-login --no-include-email --region eu-west-1 --profile paypecker > pass.sh'
@@ -87,6 +90,9 @@ pipeline {
               sh "aws configure set region 'eu-west-1' --profile paypecker"
               sh "aws configure set output 'json' --profile paypecker"
               sh 'aws eks --region eu-west-1 update-kubeconfig --name Omni --profile paypecker'
+              sh 'sudo yum remove -y docker-ce docker-ce-cli docker'
+              sh 'sudo yum install docker -y'
+              sh 'sudo systemctl start docker'
               sh 'docker build . -f ./deploy/Dockerfile --build-arg CLOUD_ID=${ELASTIC_CLOUD_ID} --build-arg CLOUD_AUTH=${ELASTIC_CLOUD_AUTH} --build-arg SERVICE_ENVIRONMENT=dev --build-arg SERVICE_NAME=${appName} -t ${appName}'
               sh 'docker tag ${appName}:latest ${IMAGETAGDEV}'
               sh 'aws ecr get-login --no-include-email --region eu-west-1 --profile paypecker > pass.sh'
@@ -124,6 +130,9 @@ pipeline {
               sh "aws configure set region 'eu-west-1' --profile paypecker"
               sh "aws configure set output 'json' --profile paypecker"
               sh 'aws eks --region eu-west-1 update-kubeconfig --name Omni --profile paypecker'
+              sh 'sudo yum remove -y docker-ce docker-ce-cli docker'
+              sh 'sudo yum install docker -y'
+              sh 'sudo systemctl start docker'
               sh 'docker build . -f ./deploy/Dockerfile -t ${appName}' 
               sh 'docker tag ${appName}:latest ${IMAGETAGPROD}'
               sh 'aws ecr get-login --no-include-email --region eu-west-1 --profile paypecker > pass.sh'
